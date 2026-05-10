@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Superstore Radial Tree</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Superstore Radial Tree Diagram</h1>
+
+    <div id="chart"></div>
+
+    <script>
+
+        const width = 1200;
+        const radius = width / 2;
+
+        d3.json("data.json").then(function(data){
+            const tree = d3.tree()
+            .size([2 * Math.PI, radius - 150]);
+
+            const root = d3.hierarchy(data);
+
+            tree(root);
+
+            const svg = d3.select("#chart")
+                .append("svg")
+                .attr("width", width)
+                .attr("height", width)
+                .append("g")
+                .attr("transform", `translate(${width / 2}, ${width / 2})`);
+
+            // LINK
+            svg.append("g")
+                .selectAll("path")
+                .data(root.links())
+                .join("path")
+                .attr("fill", "none")
+                .attr("stroke", "#999")
+                .attr("stroke-opacity", 0.6)
+                .attr("stroke-width", 1.5)
+                .attr("d", d3.linkRadial()
+                .angle(d => d.x)
+                .radius(d => d.y));
+
+            // NODE
+            svg.append("g")
+                .selectAll("circle")
+                .data(root.descendants())
+                .join("circle")
+                .attr("transform", d => `
+                rotate(${d.x * 180 / Math.PI - 90})
+                translate(${d.y},0)
+                `)
+                .attr("r", 5)
+                .attr("fill", d => {
+                    if (d.depth === 0) return "#ff4d4d";
+                    if (d.depth === 1) return "#4d79ff";
+                    if (d.depth === 2) return "#33cc99";
+                    return "#ffcc00";
+                });
+
+            // LABEL
+            svg.append("g")
+                .selectAll("text")
+                .data(root.descendants())
+                .join("text")
+                .attr("transform", d => {
+                    // ROOT
+                    if (d.depth === 0) {
+                        return `translate(0,25)`;
+                    }
+
+                    if (d.depth === 1 || d.depth === 2) {
+
+                        const angle = d.x - Math.PI / 2;
+
+                        const x = Math.cos(angle) * d.y;
+                        const y = Math.sin(angle) * d.y;
+
+                        return `translate(${x},${y})`;
+                    }
+
+                    const angle = d.x - Math.PI / 2;
+
+                    const x = Math.cos(angle) * d.y;
+                    const y = Math.sin(angle) * d.y;
+
+                    return `translate(${x},${y})`;
+                })
+
+                .attr("dy", d => {
+                    // ROOT
+                    if (d.depth === 0) {
+                        return "0.31em";
+                    }
+
+                    // Tahun & Kuartal
+                    if (d.depth === 1 || d.depth === 2) {
+                        return "1.2em";
+                    }
+
+                    // Category
+                    return "0.31em";
+                })
+
+                .attr("x", d => {
+                    // Tahun & Kuartal
+                    if (d.depth === 1 || d.depth === 2) {
+                        return 0;
+                    }
+
+                    // Category
+                    return d.x < Math.PI ? 10 : -10;
+                })
+
+                .attr("text-anchor", d => {
+                    // Tahun & Kuartal
+                    if (d.depth === 1 || d.depth === 2) {
+                        return "middle";
+                    }
+
+                    // Root
+                    if (d.depth === 0) {
+                        return "middle";
+                    }
+
+                    // Category
+                    return d.x < Math.PI ? "start" : "end";
+                })
+
+                .text(d => d.data.name)
+
+                .style("font-size", d => {
+                    if (d.depth === 0) return "22px";
+
+                    if (d.depth === 1) return "16px";
+
+                    if (d.depth === 2) return "14px";
+
+                    return "12px";
+                })
+
+                .style("font-weight", d => {
+
+                    if (d.depth <= 1) {
+                        return "bold";
+                    }
+
+                    return "normal";
+                })
+        });
+    </script>
+
+</body>
+</html>

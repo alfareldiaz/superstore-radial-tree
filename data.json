@@ -1,0 +1,136 @@
+{
+  "name": "Superstore",
+  "children": [
+    {
+      "name": "2023",
+      "children": [
+        {
+          "name": "Q1",
+          "children": [
+            {"name": "Office Supplies"}
+          ]
+        },
+        {
+          "name": "Q2",
+          "children": [
+            {"name": "Office Supplies"},
+            {"name": "Furniture"}
+          ]
+        },
+        {
+          "name": "Q3",
+          "children": [
+            {"name": "Office Supplies"}
+          ]
+        },
+        {
+          "name": "Q4",
+          "children": [
+            {"name": "Office Supplies"}
+          ]
+        }
+      ]
+    },
+
+    {
+      "name": "2024",
+      "children": [
+        {
+          "name": "Q1",
+          "children": [
+            {"name": "Technology"},
+            {"name": "Furniture"}
+          ]
+        },
+        {
+          "name": "Q2",
+          "children": [
+            {"name": "Office Supplies"},
+            {"name": "Technology"}
+          ]
+        },
+        {
+          "name": "Q3",
+          "children": [
+            {"name": "Furniture"},
+            {"name": "Office Supplies"}
+          ]
+        },
+        {
+          "name": "Q4",
+          "children": [
+            {"name": "Furniture"},
+            {"name": "Office Supplies"}
+          ]
+        }
+      ]
+    },
+
+    {
+      "name": "2025",
+      "children": [
+        {
+          "name": "Q1",
+          "children": [
+            {"name": "Office Supplies"}
+          ]
+        },
+        {
+          "name": "Q2",
+          "children": [
+            {"name": "Office Supplies"}
+          ]
+        },
+        {
+          "name": "Q3",
+          "children": [
+            {"name": "Office Supplies"},
+            {"name": "Technology"},
+            {"name": "Furniture"}
+          ]
+        },
+        {
+          "name": "Q4",
+          "children": [
+            {"name": "Technology"},
+            {"name": "Furniture"},
+            {"name": "Office Supplies"}
+          ]
+        }
+      ]
+    },
+
+    {
+      "name": "2026",
+      "children": [
+        {
+          "name": "Q1",
+          "children": [
+            {"name": "Office Supplies"},
+            {"name": "Technology"}
+          ]
+        },
+        {
+          "name": "Q2",
+          "children": [
+            {"name": "Furniture"},
+            {"name": "Office Supplies"}
+          ]
+        },
+        {
+          "name": "Q3",
+          "children": [
+            {"name": "Office Supplies"},
+            {"name": "Furniture"}
+          ]
+        },
+        {
+          "name": "Q4",
+          "children": [
+            {"name": "Furniture"}
+          ]
+        }
+      ]
+    }
+  ]
+}
